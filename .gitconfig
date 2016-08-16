@@ -1,0 +1,19 @@
+[user]
+    name = pbsinclair42
+    email = bobsmith0030+git2@gmail.com
+
+[push]
+    default = simple
+
+[alias]
+    st = status
+    statsu = status
+    stauts = status
+    staust = status
+    statua = status
+    com = commit
+    cm = commit
+    unadd = reset
+    logs = log --pretty=format:'%Cred%h %C(bold blue)(%aN)%Creset%n%B%n'
+    lg = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
+
