@@ -1,0 +1,2 @@
+alias lsa="ls -A"
+
