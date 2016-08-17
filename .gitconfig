@@ -13,6 +13,8 @@
     statua = status
     com = commit
     cm = commit
+    preview = diff --cached
+    pr = diff --cached
     unadd = reset
     logs = log --pretty=format:'%Cred%h %C(bold blue)(%aN)%Creset%n%B%n'
     lg = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
