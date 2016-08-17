@@ -16,4 +16,5 @@
     unadd = reset
     logs = log --pretty=format:'%Cred%h %C(bold blue)(%aN)%Creset%n%B%n'
     lg = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
-
+    popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort -r | less
+    graph = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
