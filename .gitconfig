@@ -5,6 +5,9 @@
 [push]
     default = simple
 
+[commit]
+    template = ~/.gittemplate.txt
+
 [alias]
     st = status
     statsu = status
