@@ -1,5 +1,16 @@
-# Don't put duplicate commands in history
-export HISTCONTROL=ignoredups
+# History config
+# **************
+
+# Don't put duplicate commands or those starting with a space into history
+export HISTCONTROL=ignoreboth
+# Save history FOREVER
+HISTSIZE=""
+HISTFILESIZE=""
+
+HISTIGNORE="pwd:?:??"
+
+# Aliases and functions
+# *********************
 
 # Add flags by default
 alias rm='rm -i'
@@ -29,6 +40,9 @@ alias cpwd='pwd | tr -d "\n" | pbcopy'
 
 # Pretty print PATH
 alias path='echo -e ${PATH//:/\\n}'
+
+# Just for fun
+alias busy='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
 # Edit and reload bashrc
 function bashrc(){
