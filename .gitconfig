@@ -13,6 +13,7 @@
     statua = status
     com = commit
     cm = commit
+    di = diff
     preview = diff --cached
     pr = diff --cached
     unadd = reset
