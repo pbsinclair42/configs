@@ -21,11 +21,15 @@ alias mkdir="mkdir -pv"
 # Alias common commands
 alias la='ls -A'
 alias rename='mv'
+alias panic='reset'
 alias back='cd $OLDPWD'
 
 # Only use less if output is big enough to need it
 alias less='less -FX'
 alias more='less'
+
+# Fix typos
+alias gti='git'
 
 # Navigation aliases
 alias cd..='cd ..'
@@ -40,6 +44,9 @@ alias cpwd='pwd | tr -d "\n" | pbcopy'
 
 # Pretty print PATH
 alias path='echo -e ${PATH//:/\\n}'
+
+# Display all terminal colours and their codes
+alias colours='for code in $(seq -w 0 255); do for attr in 0 1; do printf "%s-%03s %bTest%b\n" "${attr}" "${code}" "\e[${attr};38;05;${code}m" "\e[m"; done; done | column -c $((COLUMNS*2))'
 
 # Just for fun
 alias busy='cat /dev/urandom | hexdump -C | grep "ca fe"'
@@ -86,3 +93,7 @@ psof(){
   ps aux | grep $1
 }
 
+# Execute last command as sudo
+please() {
+  sudo $(history -p \!\!)
+}
