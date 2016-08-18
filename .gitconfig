@@ -11,13 +11,18 @@
     stauts = status
     staust = status
     statua = status
-    com = commit
-    cm = commit
+    co = commit
+    cm = commit -m
+    uncommit = reset --soft HEAD^
+    fix = commit --amend
     di = diff
-    preview = diff --cached
-    pr = diff --cached
+    preview = diff --cached --color-words
+    pr = diff --cached --color-words
     unadd = reset
-    logs = log --pretty=format:'%Cred%h %C(bold blue)(%aN)%Creset%n%B%n'
+    master = checkout master
+    logs = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b%n' --stat
+    logd = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b%n' --patch
     lg = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
     popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort -r | less
     graph = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/'
