@@ -60,7 +60,26 @@ function bashrc(){
 
 # Display count of commands from history
 popular(){
-  history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | less
+  if [ $# -gt 0 ]; then
+    if [ $# -gt 1 ]; then
+      echo "Too many paramaters"
+    elif [ $1 == "-h" -o $1 == "--help" ]; then
+      echo "usage: popular [--full] [--help]"
+      echo
+      echo "Displays the most commonly used commands from your bash history"
+      echo
+      echo "Options:"
+      echo " -f, --full   Include parameters"
+      echo " -h, --help   Display this message"
+    elif [ $1 == "-f" -o $1 == "--full" ]; then
+      history | awk '{$1 = "";CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] "¬" CMD[a]/count*100 "%¬" a;}' | grep -v "./" | column -c3 -s "¬" -t | sort -nr | nl -n ln | less
+    else
+      echo 'Unknown option:' $1
+      echo "usage: popular [--full] [--help]"
+    fi
+  else
+    history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl -n ln | less
+  fi
 }
 
 # cd and look
