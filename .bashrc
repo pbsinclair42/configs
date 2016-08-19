@@ -6,8 +6,31 @@ export HISTCONTROL=ignoreboth
 # Save history FOREVER
 HISTSIZE=""
 HISTFILESIZE=""
+shopt -s histappend
 
 HISTIGNORE="pwd:?:??"
+
+# save multiline commands as one command in history
+shopt -s cmdhist
+
+# Shell behaviour config
+# **********************
+
+# path/to/dir == cd path/to/dir
+shopt -s autocd
+
+# try and fix spelling mistakes in cd
+shopt -s cdspell
+shopt -s dirspell
+
+# alert any running jobs on exiting terminal
+shopt -s checkjobs
+
+# check for window resize after every command
+shopt -s checkwinsize
+
+# include .files in filename expansion
+shopt -s dotglob
 
 # Aliases and functions
 # *********************
