@@ -10,6 +10,11 @@ shopt -s histappend
 
 HISTIGNORE="pwd:?:??"
 
+# Make a backup of history 5% of the time
+if (( RANDOM % 20 == 0 )); then
+  \cp -f ~/.bash_history ~/.bash_history.bak
+fi
+
 # save multiline commands as one command in history
 shopt -s cmdhist
 
