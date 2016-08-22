@@ -23,8 +23,8 @@
     pr = diff --cached --color-words
     unadd = reset
     master = checkout master
-    logs = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b%n' --stat
-    logd = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b%n' --patch
+    logs = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b%n' --stat
+    logd = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch
     lg = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
     popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort -r | less
     graph = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
