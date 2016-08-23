@@ -12,7 +12,8 @@ HISTIGNORE="pwd:?:??"
 
 # Make a backup of history 5% of the time
 if (( RANDOM % 20 == 0 )); then
-  \cp -f ~/.bash_history ~/.bash_history.bak
+  d="$(date '+%Y-%m-%dT%H:%M')"
+  \cp -f ~/.bash_history ~/.history_backups/.bash_history_$d.bak
 fi
 
 # save multiline commands as one command in history
