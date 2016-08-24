@@ -6,7 +6,7 @@
     default = simple
 
 [commit]
-    template = ~/.gittemplate.txt
+    template = ~/.gittemplate
 
 [alias]
     st = status
