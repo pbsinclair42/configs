@@ -1,2 +1,3 @@
 
-################### MAX LENGTH ###################
+# 50 characters maximum length in the subject line
+# 72 characters maximum length for each line in the body before wrapping
