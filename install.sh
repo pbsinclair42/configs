@@ -1,4 +1,22 @@
-# TODO: add gitconfig installation
+# Add the universal gitconfig from the repo to the computer's global settings
+
+if [ -f ~/.gitconfig ]; then
+  sed -i '' '/# Universal config/,/# Global config/d' $HOME/.gitconfig
+  \cp $HOME/.gitconfig .temp
+  printf "# Universal config\n" > ~/.gitconfig
+  cat .gitconfig >> ~/.gitconfig
+  printf "\n# Global config\n" >> ~/.gitconfig
+  cat .temp >> ~/.gitconfig
+  \rm .temp
+else
+  touch ~/.gitconfig
+  printf "# Universal config\n" > ~/.gitconfig
+  cat .gitconfig >> ~/.gitconfig
+  printf "\n# Global config\n" >> ~/.gitconfig
+fi
+
+# Copy the gittemplate
+\cp .gittemplate ~/.gittemplate
 
 # if the bash profile link isn't there yet, make it
 CMD="source ~/.bashrc"
@@ -15,8 +33,8 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CMD="source $DIR/.bashrc"
 if [ -f $HOME/.bashrc ]; then
-  echo $CMD
   if ! fgrep -q -e "$CMD" "$HOME/.bashrc"; then
+    # add $CMD to start of ~/.bashrc
     sed -i '' $'1s#^#'"$CMD"$'\\\n#' $HOME/.bashrc
   fi
 else
