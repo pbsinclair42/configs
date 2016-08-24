@@ -19,9 +19,10 @@
     cm = commit -m
     uncommit = reset --soft HEAD^
     fix = commit --amend
-    di = diff
+    di = diff --color-words
     preview = diff --cached --color-words
     pr = diff --cached --color-words
+    last = diff --cached HEAD^ --color-words
     unadd = reset
     master = checkout master
     logs = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b%n' --stat

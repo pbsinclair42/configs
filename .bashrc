@@ -52,6 +52,7 @@ alias la='ls -A'
 alias rename='mv'
 alias panic='reset'
 alias back='cd $OLDPWD'
+alias g='git'
 
 # Only use less if output is big enough to need it
 alias less='less -FX'
