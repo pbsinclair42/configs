@@ -91,7 +91,9 @@ function bashrc(){
 # Display count of commands from history
 popular(){
   USAGESTR="usage: popular [-c] [-n #] [-h]"
-  if [ $# -gt 0 ]; then
+  CFLAG=false
+  NFLAG=false
+  while [ $# -gt 0 ]; do
     if [ $1 == "-h" -o $1 == "--help" ]; then
       echo $USAGESTR
       echo
@@ -101,26 +103,44 @@ popular(){
       echo " -c, --commands, --no-params   Count based on commands alone, ignoring parameters"
       echo " -n NUM, --number NUM          Count the number of times you used NUM commands consecutively"
       echo " -h, --help                    Display this message"
+      return
     elif [ $1 == "-c" -o $1 == "--commands" -o $1 == "--no-params" ]; then
-      history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl -n ln | less
+      CFLAG=true
+      shift
     elif [ $1 == "-n" -o $1 == "--number" ]; then
       if [ $# -lt 2 ]; then
         echo "Option requires an argument:" $1
         echo $USAGESTR
+        return
       elif [[ $2 =~ '^[1-9]+[0-9]*$' ]]; then
         echo "Invalid number of consecutive commands:" $2
+        return
       else
-        #TODO: make compatible with -c
-        export POPULAR_N=$2
-        history | awk '{n=ENVIRON["POPULAR_N"]; $1 = ""; lastcommands=""; for (i=1; i<n; i++){ lastcommands=lastcommands";"last[i]}; CMD[lastcommands";"$0]++; for (i=1; i<n-1; i++){ last[i]=last[i+1]};last[n-1]=$0; count++; }  END { for (a in CMD){msg=substr(a,3); print CMD[a] "¬" CMD[a]/count*100 "%¬" msg;} }' | grep -v "^;|^ *$" | column -c3 -s "¬" -t | sort -nr | nl -n ln | less
-        unset POPULAR_N
+        NFLAG=$2
+        shift
+        shift
       fi
     else
       echo 'Unknown option:' $1
       echo $USAGESTR
+      return
+    fi
+  done
+  if [ "$CFLAG" = false ]; then
+    if [ "$NFLAG" = false ]; then
+      history | awk '{$1 = "";CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] "¬" CMD[a]/count*100 "%¬" a;}' | column -c3 -s "¬" -t | sort -nr | nl -n ln | less
+    else
+        export POPULAR_N=$NFLAG
+        history | awk '{n=ENVIRON["POPULAR_N"]; $1 = ""; lastcommands=""; for (i=1; i<n; i++){ lastcommands=lastcommands";"last[i]}; CMD[lastcommands";"$0]++; for (i=1; i<n-1; i++){ last[i]=last[i+1]};last[n-1]=$0; count++; }  END { for (a in CMD){msg=substr(a,3); print CMD[a] "¬" CMD[a]/count*100 "%¬" msg;} }' | grep -v "^;|^ *$" | column -c3 -s "¬" -t | sort -nr | nl -n ln | less
+        unset POPULAR_N
     fi
   else
-    history | awk '{$1 = "";CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] "¬" CMD[a]/count*100 "%¬" a;}' | column -c3 -s "¬" -t | sort -nr | nl -n ln | less
+    if [ "$NFLAG" = false ]; then
+      history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl -n ln | less
+    else
+      echo "TODO"
+      #TODO
+    fi
   fi
 }
 
