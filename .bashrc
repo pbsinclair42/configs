@@ -81,11 +81,25 @@ alias colours='for code in $(seq -w 0 255); do for attr in 0 1; do printf "%s-%0
 # Just for fun
 alias busy='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
+# Save the directory of this file
+export CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Edit and reload bashrc
 function bashrc(){
-  vi ~/.bashrc < `tty` > `tty`;
-  source ~/.bashrc
-  #TODO: update git repo bashrc automatically
+  if [ $# -gt 0 ]; then
+    if [ $1 == "-l" -o $1 == "--local" ]; then
+      vi ~/.bashrc < `tty` > `tty`;
+      source ~/.bashrc
+    elif [ $1 == "-u" -o $1 == "--universal" ]; then
+      vi "$CONFIG_DIR"/.bashrc < `tty` > `tty`;
+      source ~/.bashrc
+    else
+      echo "usage: bashrc [-l | -u]"
+    fi
+  else
+    vi "$CONFIG_DIR"/.bashrc < `tty` > `tty`;
+    source ~/.bashrc
+  fi
 }
 
 # Display count of commands from history
