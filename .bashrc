@@ -138,8 +138,9 @@ popular(){
     if [ "$NFLAG" = false ]; then
       history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl -n ln | less
     else
-      echo "TODO"
-      #TODO
+        export POPULAR_N=$NFLAG
+        history | awk '{n=ENVIRON["POPULAR_N"]; $1 = ""; lastcommands=""; for (i=1; i<n; i++){ lastcommands=lastcommands"; "last[i]}; CMD[lastcommands"; "$2]++; for (i=1; i<n-1; i++){ last[i]=last[i+1]};last[n-1]=$2; count++; }  END { for (a in CMD){msg=substr(a,2); print CMD[a] "¬" CMD[a]/count*100 "%¬" msg;} }' | grep -v "^;|^ *$" | column -c3 -s "¬" -t | sort -nr | nl -n ln | less
+        unset POPULAR_N
     fi
   fi
 }
