@@ -8,6 +8,29 @@
 [commit]
     template = ~/.gittemplate
 
+[blame]
+    date = relative
+
+[grep]
+    lineNumber = true
+    extendedRegexp = true
+
+[log]
+    abbrevCommit = true
+    date = relative
+
+[format]
+    pretty=format:%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset
+
+[advice]
+    statusHints = false
+
+[column]
+    branch = auto column nodense
+
+[help]
+    autoCorrect = 1
+
 [alias]
     st = status
     statsu = status
