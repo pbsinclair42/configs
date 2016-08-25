@@ -41,3 +41,8 @@ else
   touch $HOME/.bashrc
   printf "$CMD\n" >> $HOME/.bashrc
 fi
+
+# if the bash history folder isn't there yet, make it
+if [ ! -d "$HOME/.history_backups" ]; then
+  mkdir ~/.history_backups
+fi
