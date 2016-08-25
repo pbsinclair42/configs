@@ -32,25 +32,31 @@
     autoCorrect = 1
 
 [alias]
-    st = status
+    st = status -sb
+    staus = status
     statsu = status
     stauts = status
     staust = status
     statua = status
     select = add --patch
+    pick = add --patch
     co = commit
     cm = commit -m
     uncommit = reset --soft HEAD^
+    discard = checkout --
     fix = commit --amend
     di = diff --color-words
     preview = diff --cached --color-words
     pr = diff --cached --color-words
     last = diff --cached HEAD^ --color-words
+    conflicts = diff --name-only --diff-filter=U
     unadd = reset
     master = checkout master
-    logs = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b%n' --stat
+    contributors = shortlog -s -n
+    logs = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --stat
     logd = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch --color-words
-    lg = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset'
+    lg = log
+    history = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch --color-words --follow
     popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort -r | less -FX
     graph = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    alias = "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t\\2/' | awk 'BEGIN {i=0 ; max=0} {res[i]=$1; $1=\"\"; res[i+1]=$0; res[i+2]=int((length(res[i]))/8); if(res[i+2]>max)max=res[i+2]; i=i+3; } END {for (j=0;j<length(res)-1;j++){ t=\"\"; for(i=0;i<max-res[j+2];i++){t=t \"\\t\"};print res[j] t,\"=>\" res[j+1];j+=2}}' "
+    alias = "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t\\2/' | awk 'BEGIN {i=0 ; max=0} {res[i]=$1; $1=\"\"; res[i+1]=$0; res[i+2]=int((length(res[i]))/8); if(res[i+2]>max)max=res[i+2]; i=i+3; } END {for (j=0;j<length(res)-1;j++){ t=\"\"; for(i=0;i<max-res[j+2];i++){t=t \"\\t\"};print res[j] t,\"=>\" res[j+1];j+=2}}' " | less -FX
