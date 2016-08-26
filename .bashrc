@@ -87,7 +87,7 @@ export CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Edit and reload bashrc
 function bashrc(){
   if [ $# -gt 0 ]; then
-    if [ $1 == "-l" -o $1 == "--local" ]; then
+    if [ $1 == "-l" -o $1 == "--local" -o $1 == "-g" -o $1 == "--global" ]; then
       vi ~/.bashrc < `tty` > `tty`;
       source ~/.bashrc
     elif [ $1 == "-u" -o $1 == "--universal" ]; then
@@ -99,6 +99,25 @@ function bashrc(){
   else
     vi "$CONFIG_DIR"/.bashrc < `tty` > `tty`;
     source ~/.bashrc
+  fi
+}
+
+# Edit and reload gitconfig
+function gitconfig(){
+  if [ $# -gt 0 ]; then
+    if [ $1 == "-g" -o $1 == "--global" ]; then
+      git config --global -e
+    elif [ $1 == "-l" -o $1 == "--local" ]; then
+      git config --local -e
+    elif [ $1 == "-u" -o $1 == "--universal" ]; then
+      vi "$CONFIG_DIR"/.gitconfig < `tty` > `tty`;
+      "$CONFIG_DIR"/install.sh
+    else
+      echo "usage: gitconfig [-l | -g | -u]"
+    fi
+  else
+    vi "$CONFIG_DIR"/.gitconfig < `tty` > `tty`;
+    "$CONFIG_DIR"/install.sh
   fi
 }
 
