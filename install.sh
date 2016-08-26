@@ -1,5 +1,4 @@
 # Add the universal gitconfig from the repo to the computer's global settings
-
 if [ -f ~/.gitconfig ]; then
   sed -i '' '/# Universal config/,/# Global config/d' $HOME/.gitconfig
   \cp $HOME/.gitconfig .temp
