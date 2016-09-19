@@ -1,6 +1,10 @@
 # Add the universal gitconfig from the repo to the computer's global settings
 if [ -f ~/.gitconfig ]; then
-  sed -i '' '/# Universal config/,/# Global config/d' $HOME/.gitconfig
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' '/# Universal config/,/# Global config/d' $HOME/.gitconfig
+  else
+    sed -i '/# Universal config/,/# Global config/d' $HOME/.gitconfig
+  fi
   \cp $HOME/.gitconfig .temp
   printf "# Universal config\n" > ~/.gitconfig
   cat .gitconfig >> ~/.gitconfig
@@ -34,7 +38,11 @@ CMD="source $DIR/.bashrc"
 if [ -f $HOME/.bashrc ]; then
   if ! fgrep -q -e "$CMD" "$HOME/.bashrc"; then
     # add $CMD to start of ~/.bashrc
-    sed -i '' $'1s#^#'"$CMD"$'\\\n#' $HOME/.bashrc
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      sed -i '' $'1s#^#'"$CMD"$'\\\n#' $HOME/.bashrc
+    else
+      sed -i $'1s#^#'"$CMD"$'\\\n#' $HOME/.bashrc
+    fi
   fi
 else
   touch $HOME/.bashrc
