@@ -53,3 +53,5 @@ fi
 if [ ! -d "$HOME/.history_backups" ]; then
   mkdir ~/.history_backups
 fi
+
+source ~/.bashrc
