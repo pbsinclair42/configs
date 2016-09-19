@@ -38,6 +38,10 @@ shopt -s checkwinsize
 # include .files in filename expansion
 shopt -s dotglob
 
+# Custom prompt
+# *************
+export PS1="\033[0;34m[\W]:\033[0m "
+
 # Aliases and functions
 # *********************
 
