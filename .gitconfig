@@ -29,7 +29,7 @@
     branch = auto column nodense
 
 [help]
-    autoCorrect = 1
+    autoCorrect = 30
 
 [alias]
     st = status -sb
