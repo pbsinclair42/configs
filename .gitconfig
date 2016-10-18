@@ -53,6 +53,7 @@
     unadd = reset
     master = checkout master
     contributors = shortlog -s -n
+    cdiff = !git diff "$@"^!
     logs = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --stat
     logd = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch
     lg = log
