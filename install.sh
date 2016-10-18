@@ -1,26 +1,3 @@
-# Add the universal gitconfig from the repo to the computer's global settings
-if [ -f ~/.gitconfig ]; then
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i '' '/# Universal config/,/# Global config/d' $HOME/.gitconfig
-  else
-    sed -i '/# Universal config/,/# Global config/d' $HOME/.gitconfig
-  fi
-  \cp $HOME/.gitconfig .temp
-  printf "# Universal config\n" > ~/.gitconfig
-  cat .gitconfig >> ~/.gitconfig
-  printf "\n# Global config\n" >> ~/.gitconfig
-  cat .temp >> ~/.gitconfig
-  \rm .temp
-else
-  touch ~/.gitconfig
-  printf "# Universal config\n" > ~/.gitconfig
-  cat .gitconfig >> ~/.gitconfig
-  printf "\n# Global config\n" >> ~/.gitconfig
-fi
-
-# Copy the gittemplate
-\cp .gittemplate ~/.gittemplate
-
 # if the bash profile link isn't there yet, make it
 CMD="source ~/.bashrc"
 if [ -f $HOME/.bash_profile ]; then
@@ -55,3 +32,26 @@ if [ ! -d "$HOME/.history_backups" ]; then
 fi
 
 source ~/.bashrc
+
+# Add the universal gitconfig from the repo to the computer's global settings
+if [ -f ~/.gitconfig ]; then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' '/# Universal config/,/# Global config/d' $HOME/.gitconfig
+  else
+    sed -i '/# Universal config/,/# Global config/d' $HOME/.gitconfig
+  fi
+  \cp $HOME/.gitconfig .temp
+  printf "# Universal config\n" > ~/.gitconfig
+  cat $CONFIG_DIR/.gitconfig >> ~/.gitconfig
+  printf "\n# Global config\n" >> ~/.gitconfig
+  cat .temp >> ~/.gitconfig
+  \rm .temp
+else
+  touch ~/.gitconfig
+  printf "# Universal config\n" > ~/.gitconfig
+  cat $CONFIG_DIR/.gitconfig >> ~/.gitconfig
+  printf "\n# Global config\n" >> ~/.gitconfig
+fi
+
+# Copy the gittemplate
+\cp $CONFIG_DIR/.gittemplate ~/.gittemplate
