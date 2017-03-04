@@ -38,6 +38,10 @@ shopt -s checkwinsize
 # include .files in filename expansion
 shopt -s dotglob
 
+# Don't create .pyc files
+PYTHONDONTWRITEBYTECODE=True
+export PYTHONDONTWRITEBYTECODE
+
 # Custom prompt
 # *************
 export PS1="\033[0;34m[\W]:\033[0m "
