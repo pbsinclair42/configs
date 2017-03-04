@@ -44,8 +44,8 @@ export PYTHONDONTWRITEBYTECODE
 
 # Custom prompt
 # *************
-export PS1="\033[0;34m[\W]:\033[0m "
-export PS2="\033[0;34m[\W]>\033[0m "
+export PS1="\[\033[0;34m\][\W]:\[\033[0m\] "
+export PS2="\[\033[0;34m\][\W]>\[\033[0m\] "
 
 # Aliases and functions
 # *********************
