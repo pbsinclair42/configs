@@ -39,8 +39,11 @@ shopt -s checkwinsize
 shopt -s dotglob
 
 # Don't create .pyc files
-PYTHONDONTWRITEBYTECODE=True
-export PYTHONDONTWRITEBYTECODE
+export PYTHONDONTWRITEBYTECODE=True
+
+# Make vi the default editor
+export EDITOR='vi'
+export VISUAL='program'
 
 # Custom prompt
 # *************
