@@ -43,7 +43,7 @@ export PYTHONDONTWRITEBYTECODE=True
 
 # Make vi the default editor
 export EDITOR='vi'
-export VISUAL='program'
+export VISUAL='vi'
 
 # Custom prompt
 # *************
@@ -82,7 +82,7 @@ alias .....='cd ../../../..'
 alias cd-='cd -'
 
 # Copy working directory path
-alias cpwd='pwd | tr -d "\n" | pbcopy'
+alias cwd='pwd | tr -d "\n" | xclip -selection clipboard'
 
 # Pretty print PATH
 alias path='echo -e ${PATH//:/\\n}'
