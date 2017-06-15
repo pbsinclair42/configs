@@ -81,6 +81,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias cd-='cd -'
 
+# Use ~ instead of home in pwd
+alias pwd='echo ${PWD/$HOME/"~"}'
+
 # Copy working directory path
 alias cwd='pwd | tr -d "\n" | xclip -selection clipboard'
 
