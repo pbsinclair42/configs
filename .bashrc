@@ -262,3 +262,8 @@ function maketar() {
 function makezip() {
  zip -r "${1%%/}.zip" "$1" ;
 }
+
+# view a pretty printed JSON file
+function json(){
+ cat $1 | jq '.' | less
+}
