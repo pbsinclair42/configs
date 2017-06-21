@@ -54,7 +54,6 @@ export PS2="\[\033[0;34m\][\W]>\[\033[0m\] "
 # *********************
 
 # Add flags by default
-alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir="mkdir -pv"
@@ -82,7 +81,7 @@ alias .....='cd ../../../..'
 alias cd-='cd -'
 
 # Use ~ instead of home in pwd
-alias pwd='echo ${PWD/$HOME/"~"}'
+alias wd='echo ${PWD/$HOME/"~"}'
 
 # Copy working directory path
 alias cwd='pwd | tr -d "\n" | xclip -selection clipboard'
