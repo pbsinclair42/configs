@@ -55,3 +55,6 @@ fi
 
 # Copy the gittemplate
 \cp $CONFIG_DIR/.gittemplate ~/.gittemplate
+
+# Copy the inputrc
+\cp $CONFIG_DIR/.inputrc ~/.inputrc
