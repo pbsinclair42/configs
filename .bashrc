@@ -95,6 +95,9 @@ alias cwd='pwd | tr -d "\n" | xclip -selection clipboard'
 # Pretty print PATH
 alias path='echo -e ${PATH//:/\\n}'
 
+# Search history
+alias hgrep='history | grep'
+
 # BEEP
 alias beep='echo -e "\a"'
 
