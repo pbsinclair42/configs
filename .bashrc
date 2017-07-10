@@ -57,6 +57,11 @@ export PS2="\[\033[0;34m\]>\[\033[0m\] "
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir="mkdir -pv"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
 
 # Alias common commands
 alias la='ls -A'
@@ -71,6 +76,7 @@ alias more='less'
 
 # Fix typos
 alias gti='git'
+alias gt='git'
 
 # Navigation aliases
 alias cd..='cd ..'
