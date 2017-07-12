@@ -228,6 +228,12 @@ mcd(){
   cd -P -- "$1"
 }
 
+# cd into directory of moved file
+mvcd(){
+  mv "$1" "$2" &&
+  cd ${2%/*}
+}
+
 # List details of all processes with name
 # Usage: psof python
 psof(){
