@@ -234,6 +234,12 @@ mvcd(){
   cd ${2%/*}
 }
 
+# colour find in the same way as ls
+finc(){
+  find "$1" -exec ls --color -d {} \;
+}
+
+
 # List details of all processes with name
 # Usage: psof python
 psof(){
