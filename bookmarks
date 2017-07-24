@@ -1,0 +1,75 @@
+# usage:
+#   bookmark current directory
+#   $ b [name]
+#
+#   go to a bookmarked directory by name
+#   $ go name
+#
+#   remove a bookmark
+#   $ rmb name
+#
+#   display all bookmarked dirs.
+#   $ bl
+
+BOOKMARK_DIR=~/.bash_bookmarks
+
+# Bookmark current directory (optional name as arg)
+function b(){
+  mkdir -p $BOOKMARK_DIR
+  key=${1:-"DEFAULT"}
+  file=$BOOKMARK_DIR/$key
+  value=${PWD/$HOME/"~"}
+  if [ -r $file ]; then
+    read -p "Bookmark already exists (`cat $file`).  Rewrite? " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      echo $value > $file
+      echo "Bookmarked $key: $value"
+    fi
+  else
+    echo $value > $file
+    echo Bookmarked $key = $value
+  fi
+}
+
+# Go to a bookmark
+function go(){
+  mkdir -p $BOOKMARK_DIR
+  key=${1:-"DEFAULT"}
+  file=$BOOKMARK_DIR/$key
+  if [ -r $file ]; then
+    dest=$(cat $file)
+    cd ${dest/"~"/$HOME};
+  else
+    echo "No bookmark called $key"
+  fi
+}
+
+# Remove a bookmark
+function rmb(){
+  key=${1:-"DEFAULT"}
+  file=$BOOKMARK_DIR/$key
+  if [ -r $file ]; then
+    rm $file
+  else
+    echo "No bookmark called $key"
+  fi
+}
+
+if [ $SHELL = "/bin/bash" ]; then
+  complete -o default -W '`ls $BOOKMARK_DIR`' go g
+fi
+
+# List bookmarks
+function bl()
+{
+ bookmarks=""
+  for file in $BOOKMARK_DIR/*; do
+    bName=$(basename $file);
+    bDest=$(cat $file);
+    bookmarks="$bookmarks$bName:\t$bDest\n"
+  done
+  echo -ne $bookmarks | column -t
+}
+
+alias bls=bl

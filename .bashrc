@@ -110,6 +110,9 @@ alias busy='cat /dev/urandom | hexdump -C | grep "ca fe"'
 # Save the directory of this file
 export CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Import bookmarks functionality
+source "$CONFIG_DIR/bookmarks"
+
 # Edit and reload bashrc
 function bashrc(){
   if [ $# -gt 0 ]; then
