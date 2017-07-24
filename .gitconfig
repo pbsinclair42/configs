@@ -39,6 +39,8 @@
     staust = status
     statua = status
     ad = add
+    addu = add -u
+    adu = add -u
     select = add --patch
     pick = add --patch
     co = commit

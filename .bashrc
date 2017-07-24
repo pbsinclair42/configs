@@ -289,5 +289,5 @@ function makezip() {
 
 # view a pretty printed JSON file
 function json(){
- cat $1 | jq '.' | less
+ cat $1 | jq -C '.' | less -R
 }
