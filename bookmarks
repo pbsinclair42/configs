@@ -45,24 +45,51 @@ function go(){
   fi
 }
 
+# Rename a bookmark
+function bmv(){
+  key=${1:-"DEFAULT"}
+  file=$BOOKMARK_DIR/$key
+  if [ -r $file ]; then
+    if [ $# -gt 1 ]; then
+      dest=$BOOKMARK_DIR/$2
+      if [ -r $dest ]; then
+        read -p "Bookmark '$2' already exists (`cat $dest`).  Rewrite? " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+          \mv $file $dest
+          echo "Renamed $key to $2"
+        fi
+      else
+        mv $file $dest
+        echo "Renamed $key to $2"
+      fi
+    else
+      echo "Missing new bookmark name"
+    fi
+  else
+    echo "No bookmark called $key"
+  fi
+}
+alias brn=bmv
+
 # Remove a bookmark
-function rmb(){
+function brm(){
   key=${1:-"DEFAULT"}
   file=$BOOKMARK_DIR/$key
   if [ -r $file ]; then
     rm $file
+    echo "Removed bookmark $key"
   else
     echo "No bookmark called $key"
   fi
 }
 
 if [ $SHELL = "/bin/bash" ]; then
-  complete -o default -W '`ls $BOOKMARK_DIR`' go g
+  complete -o default -W '`ls $BOOKMARK_DIR`' go bmv brn brm
 fi
 
 # List bookmarks
-function bl()
-{
+function bl(){
  bookmarks=""
   for file in $BOOKMARK_DIR/*; do
     bName=$(basename $file);
