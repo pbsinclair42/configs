@@ -254,33 +254,41 @@ please() {
   sudo $(history -p \!\!)
 }
 
-# unzip any compressed file
-extract () {
- if [ -f $1 ] ; then
-  case $1 in
-   *.tar.bz2)	tar xvjf $1   &> /dev/null && extracted=$(basename "$1" .tar.bz2);;
-   *.tar.gz)	tar xvzf $1   &> /dev/null && extracted=$(basename "$1" .tar.gz);;
-   *.tar.xz)	tar Jxvf $1   &> /dev/null && extracted=$(basename "$1" .tar.xz);;
-   *.bz2)	bunzip2 $1    &> /dev/null && extracted=$(basename "$1" /bz2) ;;
-   *.rar)	unrar x $1    &> /dev/null && extracted=$(basename "$1" .rar) ;;
-   *.gz)	gunzip $1     &> /dev/null && extracted=$(basename "$1" .gz);;
-   *.tar)	tar xvf $1    &> /dev/null && extracted=$(basename "$1" .tar) ;;
-   *.tbz2)	tar xvjf $1   &> /dev/null && extracted=$(basename "$1" .tbz2) ;;
-   *.tgz)	tar xvzf $1   &> /dev/null && extracted=$(basename "$1" .tgz) ;;
-   *.zip)	unzip $1      &> /dev/null && extracted=$(basename "$1" .zip) ;;
-   *.Z)		uncompress $1 &> /dev/null && extracted=$(basename "$1" .Z) ;;
-   *.7z)	7z x $1       &> /dev/null && extracted=$(basename "$1" .7z) ;;
-   *)		echo "Unknown file extension: '$1'" && return 1 ;;
-  esac
-  if [ -f $1 ] ; then
-    rm $1;
-  fi
-  if [ -d $extracted ]; then
-    cd $extracted;
-  fi
- else
-  echo "File not found: '$1'" && return 1;
- fi
+# unzip any compressed files
+extract() {
+  RED='\033[0;31m'
+  GREEN='\033[0;32m'
+  while [ $# -gt 0 ]; do
+    printf "${RED}"
+    if [ -f $1 ]; then
+      case $1 in
+        *.tar.bz2) tar xvjf $1   2>&1 >/dev/null;;
+        *.tar.gz)  tar xvzf $1   2>&1 >/dev/null;;
+        *.tar.xz)  tar Jxvf $1   2>&1 >/dev/null;;
+        *.bz2)     bunzip2 $1    2>&1 >/dev/null;;
+        *.rar)     unrar x $1    2>&1 >/dev/null;;
+        *.gz)      gunzip $1     2>&1 >/dev/null;;
+        *.tar)     tar xvf $1    2>&1 >/dev/null;;
+        *.tbz2)    tar xvjf $1   2>&1 >/dev/null;;
+        *.tgz)     tar xvzf $1   2>&1 >/dev/null;;
+        *.zip)     unzip $1      2>&1 >/dev/null;;
+        *.Z)       uncompress $1 2>&1 >/dev/null;;
+        *.7z)      7z x $1       2>&1 >/dev/null;;
+        *)         (exit 1);;
+      esac
+      if [ $? -eq 0 ]; then
+        echo -e "${GREEN}Successfully extracted $1"
+        if [ -f $1 ]; then
+          rm $1
+        fi
+      else
+        echo -e "${RED}Unable to extract $1"
+      fi
+      shift
+    else
+      echo -e "${RED}File not found: '$1'";
+    fi
+  done
 }
 
 # creates an archive (*.tar.gz) from given directory.
