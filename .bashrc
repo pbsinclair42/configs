@@ -98,6 +98,9 @@ alias path='echo -e ${PATH//:/\\n}'
 # Search history
 alias hgrep='history | grep'
 
+# Line count
+alias lc='wc -l'
+
 # BEEP
 alias beep='echo -e "\a"'
 
