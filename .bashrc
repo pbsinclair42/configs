@@ -261,6 +261,7 @@ please() {
 extract() {
   RED='\033[0;31m'
   GREEN='\033[0;32m'
+  NC='\033[0;0m'
   while [ $# -gt 0 ]; do
     printf "${RED}"
     if [ -f $1 ]; then
@@ -292,6 +293,7 @@ extract() {
       echo -e "${RED}File not found: '$1'";
     fi
   done
+  printf "$NC"
 }
 
 # creates an archive (*.tar.gz) from given directory.
