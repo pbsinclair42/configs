@@ -63,4 +63,4 @@
     history = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch --follow
     popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort -rg | less -FX
     graph = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    alias = "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t\\2/' | awk 'BEGIN {i=0 ; max=0} {res[i]=$1; $1=\"\"; res[i+1]=$0; res[i+2]=int((length(res[i]))/8); if(res[i+2]>max)max=res[i+2]; i=i+3; } END {for (j=0;j<length(res)-1;j++){ t=\"\"; for(i=0;i<max-res[j+2];i++){t=t \"\\t\"};print res[j] t,\"=>\" res[j+1];j+=2}}' " | less -FX
+    alias = "!git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\t\\2/' | awk 'BEGIN {i=0 ; max=0} {res[i]=$1; $1=\"\"; res[i+1]=$0; res[i+2]=length(res[i]); if(res[i+2]>max)max=res[i+2]; i=i+3; } END {for (j=0;j<i-1;j++){ t=\"\"; for(k=0;k<max-res[j+2];k++){t=t \" \"};print res[j] t,\"=\" res[j+1];j+=2}}' " | less -FX
