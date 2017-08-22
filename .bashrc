@@ -70,8 +70,10 @@ alias panic='reset'
 alias back='cd $OLDPWD'
 alias g='git'
 
-# Only use less if output is big enough to need it
-alias less='less -FX'
+# Only use less if output is big enough to need it (-FX)
+# Use colours (-R)
+# Show search results in the middle of hte screen (-j.5)
+alias less='less -FXRj.5'
 alias more='less'
 
 # Fix typos
