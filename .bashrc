@@ -106,9 +106,6 @@ alias lc='wc -l'
 # BEEP
 alias beep='echo -e "\a"'
 
-# Display all terminal colours and their codes
-alias colours='for code in $(seq -w 0 255); do for attr in 0 1; do printf "%s-%03s %bTest%b\n" "${attr}" "${code}" "\e[${attr};38;05;${code}m" "\e[m"; done; done | column -c $((COLUMNS*2))'
-
 # Just for fun
 alias busy='cat /dev/urandom | hexdump -C | \grep "ca fe"'
 
@@ -117,6 +114,16 @@ export CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Import bookmarks functionality
 source "$CONFIG_DIR/bookmarks"
+
+# Display all terminal colours and their codes
+function colours(){
+  echo "Usage: \e[(0 or 1);38;05;(code)m"
+  for code in $(seq -w 0 255); do
+    for attr in 0 1; do
+      printf "%s-%03s %bTest%b\n" "${attr}" "${code}" "\e[${attr};38;05;${code}m" "\e[m";
+    done;
+  done | column -c $((COLUMNS*2))
+}
 
 # Edit and reload bashrc
 function bashrc(){
