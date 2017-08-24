@@ -33,11 +33,6 @@
 
 [alias]
     st = status -sb
-    staus = status
-    statsu = status
-    stauts = status
-    staust = status
-    statua = status
     ad = add
     addu = add -u
     adu = add -u
