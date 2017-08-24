@@ -47,7 +47,10 @@ export VISUAL='vi'
 
 # Custom prompt
 # *************
-export PS1="\[\033[0;34m\][\W]:\[\033[0m\] "
+_generate_prompt(){
+  export PS1="\[\033[0;38;05;64m\]`git branch --column 2> /dev/null | sed 's/.*\* \([^ ]*\).*/<\1> /g'`\[\033[0;34m\][\W]:\[\033[0m\] "
+}
+PROMPT_COMMAND="_generate_prompt"
 export PS2="\[\033[0;34m\]>\[\033[0m\] "
 
 # Aliases and functions
