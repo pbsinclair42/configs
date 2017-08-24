@@ -115,6 +115,9 @@ export CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Import bookmarks functionality
 source "$CONFIG_DIR/bookmarks"
 
+# Import git autocompletion functionality
+source "$CONFIG_DIR/git_autocomplete"
+
 # Display all terminal colours and their codes
 function colours(){
   echo "Usage: \e[(0 or 1);38;05;(code)m"

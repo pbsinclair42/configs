@@ -1,0 +1,79 @@
+_gitcomp(){
+  local cur prev
+  cur=${COMP_WORDS[COMP_CWORD]}
+  prev=${COMP_WORDS[COMP_CWORD-1]}
+  case ${COMP_CWORD} in
+    1)
+      COMPREPLY=($(compgen -W "`_all_git_commands`" ${cur}));;
+    2)
+      case ${prev} in
+        checkout)
+          COMPREPLY=($(compgen -W "`git branch | sed 's/\*//g'`" ${cur}));;
+        *)
+          COMPREPLY=($(compgen -f ${cur}));;
+      esac;;
+    *)
+      COMPREPLY=($(compgen -f "${cur}"));;
+  esac
+}
+
+_all_git_commands(){
+  # get normal commands
+  for i in `git help -a|egrep '^  [a-zA-Z0-9]'`; do
+    # filter out boring stuff
+    case $i in
+      *--*)               ;;
+      cat-file)           ;;
+      check-*)            ;;
+      column)             ;;
+      commit-tree)        ;;
+      count-object)       ;;
+      credential*)        ;;
+      daemon)             ;;
+      diff-*)             ;;
+      fast-*)             ;;
+      fetch-*)            ;;
+      fmt-merge-msg)      ;;
+      for-each-ref)       ;;
+      fsck-objects)       ;;
+      hash-object)        ;;
+      http-*)             ;;
+      index-pack)         ;;
+      init-db)            ;;
+      interpret-trailers) ;;
+      ls-*)               ;;
+      mail*)              ;;
+      merge-*)            ;;
+      mktag)              ;;
+      mktree)             ;;
+      pack-*)             ;;
+      patch-id)           ;;
+      prune*)             ;;
+      quiltimport)        ;;
+      read-tree)          ;;
+      receive-pack)       ;;
+      remote-*)           ;;
+      rerere)             ;;
+      rev-*)              ;;
+      send-pack)          ;;
+      shell)              ;;
+      show-index)         ;;
+      show-ref)           ;;
+      stripspace)         ;;
+      symoblic-ref)       ;;
+      unpack-*)           ;;
+      update-*)           ;;
+      upload*)            ;;
+      var)                ;;
+      verify-*)           ;;
+      write-tree)         ;;
+      *)                  echo $i;;
+    esac;
+  done
+  # get aliased commands
+  for i in `git config --name-only --get-regexp "^alias\..*"`; do
+    echo "${i#alias.}"
+  done
+}
+
+complete -F _gitcomp git
