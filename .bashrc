@@ -38,6 +38,9 @@ shopt -s checkwinsize
 # include .files in filename expansion
 shopt -s dotglob
 
+# use ** to match any number of subdirectories
+shopt -s globstar
+
 # Don't create .pyc files
 export PYTHONDONTWRITEBYTECODE=True
 
