@@ -54,7 +54,7 @@
     cdiff = !git diff "$@"^!
     logs = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --stat
     logd = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch
-    lg = !git log | head
+    lg = "!if [ $(git log | wc -l) -lt 10 ]; then git log; else git log | head; fi"
     me = !git log --author="$(git config user.name)"
     history = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch --follow
     popular = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort -rg | less -FX
