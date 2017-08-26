@@ -126,12 +126,26 @@ source "$CONFIG_DIR/git_autocomplete"
 
 # Display all terminal colours and their codes
 function colours(){
-  echo "Usage: \e[(0 or 1);38;05;(code)m"
-  for code in $(seq -w 0 255); do
-    for attr in 0 1; do
-      printf "%s-%03s %bTest%b\n" "${attr}" "${code}" "\e[${attr};38;05;${code}m" "\e[m";
-    done;
-  done | column -c $((COLUMNS*2))
+  if [ $# -gt 0 ]; then
+    if [ $1 == "-s" -o $1 == "--simple" -o $1 == "--simp" ]; then
+      echo "Example: \e[(0 or 1);(code)m"
+      for code in {30..37} {90..97}; do
+        for attr in 2 0 1; do
+          printf "%s-%02s %bTest%b\n" "${attr}" "${code}" "\e[${attr};${code}m" "\e[m";
+        done
+      done | column -c $((COLUMNS))
+      return
+    else
+      echo "Usage: colours [-s | -h]"
+    fi
+  else
+    echo "Example: \e[(0 or 1);38;05;(code)m"
+    for code in $(seq -w 0 255); do
+      for attr in 2 0 1; do
+        printf "%s-%03s %bTest%b\n" "${attr}" "${code}" "\e[${attr};38;5;${code}m" "\e[m";
+      done;
+    done | column -c $((COLUMNS*2))
+  fi
 }
 
 # Edit and reload bashrc
