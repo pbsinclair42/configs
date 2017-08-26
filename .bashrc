@@ -89,7 +89,7 @@ alias g='git'
 
 # Only use less if output is big enough to need it (-FX)
 # Use colours (-R)
-# Show search results in the middle of hte screen (-j.5)
+# Show search results in the middle of the screen (-j.5)
 alias less='less -FXRj.5'
 alias more='less'
 
