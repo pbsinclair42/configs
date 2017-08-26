@@ -51,10 +51,21 @@ export VISUAL='vi'
 # Custom prompt
 # *************
 _generate_prompt(){
-  export PS1="\[\033[0;38;05;64m\]`git branch --column 2> /dev/null | sed 's/.*\* \([^ ]*\).*/<\1> /g'`\[\033[0;34m\][\W]:\[\033[0m\] "
+  local GREEN BLUE PURPLE NOCOLOUR PYTHON_VIRTUALENV GIT_BRANCH
+  GREEN="\[\e[0;38;05;64m\]"
+  BLUE="\[\e[0;34m\]"
+  PURPLE="\[\e[1;38;05;127m\]"
+  NC="\[\e[m\]"
+  if test -z "$VIRTUAL_ENV" ; then
+    PYTHON_VIRTUALENV=""
+  else
+    PYTHON_VIRTUALENV="${PURPLE}* "
+  fi
+  GIT_BRANCH=`git branch --column 2> /dev/null | sed 's/.*\* \([^ ]*\).*/<\1> /g'`
+  export PS1="${PYTHON_VIRTUALENV}${GREEN}${GIT_BRANCH}${BLUE}[\W]:${NC} "
 }
 PROMPT_COMMAND="_generate_prompt"
-export PS2="\[\033[0;34m\]>\[\033[0m\] "
+export PS2="\[\e[0;34m\]>\[\e[m\] "
 
 # Aliases and functions
 # *********************
