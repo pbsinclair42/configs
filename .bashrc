@@ -264,8 +264,9 @@ cl(){
         ;;
       *)
         cd "$1"
-        ls $params ./
         shift
+        ls $params $@ ./
+        return
         ;;
     esac
   done
