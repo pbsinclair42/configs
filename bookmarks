@@ -14,7 +14,7 @@
 BOOKMARK_DIR=~/.bash_bookmarks
 
 # Bookmark current directory (optional name as arg)
-function b(){
+b(){
   mkdir -p $BOOKMARK_DIR
   key=${1:-"DEFAULT"}
   file=$BOOKMARK_DIR/$key
@@ -33,7 +33,7 @@ function b(){
 }
 
 # Go to a bookmark
-function go(){
+go(){
   mkdir -p $BOOKMARK_DIR
   key=${1:-"DEFAULT"}
   file=$BOOKMARK_DIR/$key
@@ -46,7 +46,7 @@ function go(){
 }
 
 # Rename a bookmark
-function bmv(){
+bmv(){
   key=${1:-"DEFAULT"}
   file=$BOOKMARK_DIR/$key
   if [ -r $file ]; then
@@ -73,7 +73,7 @@ function bmv(){
 alias brn=bmv
 
 # Remove a bookmark
-function brm(){
+brm(){
   key=${1:-"DEFAULT"}
   file=$BOOKMARK_DIR/$key
   if [ -r $file ]; then
@@ -89,7 +89,7 @@ if [ $SHELL = "/bin/bash" ]; then
 fi
 
 # List bookmarks
-function bl(){
+bl(){
  bookmarks=""
   for file in $BOOKMARK_DIR/*; do
     bName=$(basename $file);

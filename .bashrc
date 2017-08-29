@@ -136,7 +136,7 @@ source "$CONFIG_DIR/bookmarks"
 source "$CONFIG_DIR/git_autocomplete"
 
 # Display all terminal colours and their codes
-function colours(){
+colours(){
   if [ $# -gt 0 ]; then
     if [ $1 == "-s" -o $1 == "--simple" -o $1 == "--simp" ]; then
       echo "Example: \e[(0 or 1);(code)m"
@@ -160,7 +160,7 @@ function colours(){
 }
 
 # Edit and reload bashrc
-function bashrc(){
+bashrc(){
   if [ $# -gt 0 ]; then
     if [ $1 == "-l" -o $1 == "--local" -o $1 == "-g" -o $1 == "--global" ]; then
       vi ~/.bashrc < `tty` > `tty`;
@@ -178,7 +178,7 @@ function bashrc(){
 }
 
 # Edit and reload gitconfig
-function gitconfig(){
+gitconfig(){
   if [ $# -gt 0 ]; then
     if [ $1 == "-g" -o $1 == "--global" ]; then
       git config --global -e
@@ -254,7 +254,7 @@ popular(){
 }
 
 # cd and look
-function cl(){
+cl(){
   params=""
   while test $# -gt 0; do
     case "$1" in
@@ -343,16 +343,16 @@ extract() {
 }
 
 # creates an archive (*.tar.gz) from given directory.
-function maketar() {
+maketar() {
  tar cvzf "${1%%/}.tar.gz"  "${1%%/}/";
 }
 
 # create a ZIP archive of a file or folder.
-function makezip() {
+makezip() {
  zip -r "${1%%/}.zip" "$1" ;
 }
 
 # view a pretty printed JSON file
-function json(){
+json(){
  cat $1 | jq -C '.' | less -R
 }
