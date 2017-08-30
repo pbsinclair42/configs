@@ -74,7 +74,7 @@ export PS2="\[\e[0;34m\]>\[\e[m\] "
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir="mkdir -pv"
-alias ls='ls --color=auto'
+alias ls='ls --indicator-style=slash --group-directories-first --color=auto --time-style=+"%y/%m/%d-%H:%m"'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -82,6 +82,7 @@ alias egrep='egrep --color=auto'
 
 # Alias common commands
 alias la='ls -A'
+alias ll='ls -lgGAhN'
 alias rename='mv'
 alias panic='reset'
 alias back='cd $OLDPWD'
