@@ -351,8 +351,11 @@ extract() {
         echo -e "${RED}Unable to extract $1"
       fi
       shift
+    elif [ $1=="*" ]; then
+      shift
     else
       echo -e "${RED}File not found: '$1'";
+      shift
     fi
   done
   printf "$NC"
