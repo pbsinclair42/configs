@@ -136,6 +136,9 @@ source "$CONFIG_DIR/bookmarks"
 # Import git autocompletion functionality
 source "$CONFIG_DIR/git_autocomplete"
 
+# Import ssh autocompletion functionality
+source "$CONFIG_DIR/ssh_autocomplete"
+
 # Show size of all directories and files
 size(){
   local esc=$(printf '\e')
