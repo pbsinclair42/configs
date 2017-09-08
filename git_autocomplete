@@ -2,7 +2,7 @@ _gitcomp(){
   local cur prev branches
   cur=${COMP_WORDS[COMP_CWORD]}
   prev=${COMP_WORDS[COMP_CWORD-1]}
-  branches="$(git branch | sed 's/\*//g')"
+  branches="$(git branch 2> /dev/null | sed 's/\*//g')"
   case ${COMP_CWORD} in
     1)
       COMPREPLY=($(compgen -W "`_all_git_commands`" -- ${cur}));;
