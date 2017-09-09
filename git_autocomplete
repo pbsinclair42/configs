@@ -3,6 +3,7 @@ _gitcomp(){
   cur=${COMP_WORDS[COMP_CWORD]}
   prev=${COMP_WORDS[COMP_CWORD-1]}
   branches="$(git branch 2> /dev/null | sed 's/\*//g')"
+  gitfiles="$(git status -s 2> /dev/null | sed 's/^...//g')"
   case ${COMP_CWORD} in
     1)
       COMPREPLY=($(compgen -W "`_all_git_commands`" -- ${cur}));;
@@ -10,15 +11,13 @@ _gitcomp(){
       case ${prev} in
         checkout)
           COMPREPLY=($(compgen -W "$branches" -- ${cur}));;
-        *)
-          COMPREPLY=($(compgen -f -- ${cur}));;
+        ad|add|select|pick|discard|di|diff|reset|unadd|preview|pr)
+          COMPREPLY=($(compgen -W "$gitfiles" -- ${cur}));;
       esac;;
     *)
       case ${COMP_WORDS[1]} in
         branch)
           COMPREPLY=($(compgen -W "$branches" -- ${cur}));;
-        *)
-          COMPREPLY=($(compgen -f -- ${cur}));;
       esac
   esac
 }
@@ -83,4 +82,4 @@ _all_git_commands(){
   done
 }
 
-complete -F _gitcomp git
+complete -o default -F _gitcomp git
