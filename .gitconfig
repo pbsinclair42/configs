@@ -11,6 +11,9 @@
 [blame]
     date = relative
 
+[core]
+    hooksPath = ~/.githooks
+
 [grep]
     lineNumber = true
     extendedRegexp = true

@@ -58,3 +58,7 @@ fi
 
 # Copy the inputrc
 \cp $CONFIG_DIR/.inputrc ~/.inputrc
+
+# Copy the githooks
+\cp -r $CONFIG_DIR/.githooks/ ~
+chmod +x ~/.githooks/*
