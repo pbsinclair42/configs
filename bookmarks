@@ -12,10 +12,10 @@
 #   $ bl
 
 BOOKMARK_DIR=~/.bash_bookmarks
+mkdir -p $BOOKMARK_DIR
 
 # Bookmark current directory (optional name as arg)
 b(){
-  mkdir -p $BOOKMARK_DIR
   key=${1:-"DEFAULT"}
   file=$BOOKMARK_DIR/$key
   value=${PWD/$HOME/"~"}
@@ -34,7 +34,6 @@ b(){
 
 # Go to a bookmark
 go(){
-  mkdir -p $BOOKMARK_DIR
   key=${1:-"DEFAULT"}
   file=$BOOKMARK_DIR/$key
   if [ -r $file ]; then

@@ -141,16 +141,16 @@ source "$CONFIG_DIR/ssh_autocomplete"
 
 # Show size of all directories and files
 size(){
-  local esc=$(printf '\e')
+  local esc=$(printf '\e');
   if [ $# -gt 0 ]; then
     if [ $1 == "-s" -o $1 == "--sort" -o $1 == "--sorted" ]; then
-      { du -sh */ | sort -rh | sed "s#\t\([^/]*\)#\t${esc}[1;34m\1${esc}[m#g"; find -maxdepth 1 -type f -exec du -sh {} + | sed 's\./\\' | sort -rh; } | cat
+      { du -sh */ | sort -rh | sed "s#\t\([^/]*\)#\t${esc}[1;34m\1${esc}[m#g"; find -maxdepth 1 -type f -exec du -sh {} + | sed 's\./\\' | sort -rh; } | cat;
     else
-      echo "Usage: size [-s]"
+      echo "Usage: size [-s]";
     fi
   else
-    { du -sh */ | sed "s#\t\([^/]*\)#\t${esc}[1;34m\1${esc}[m#g"; find -maxdepth 1 -type f -exec du -sh {} + | sed 's\./\\'; } | cat
-  fi
+    { du -sh */ | sed "s#\t\([^/]*\)#\t${esc}[1;34m\1${esc}[m#g"; find -maxdepth 1 -type f -exec du -sh {} + | sed 's\./\\'; } | cat;
+  fi;
 }
 
 # Display all terminal colours and their codes
