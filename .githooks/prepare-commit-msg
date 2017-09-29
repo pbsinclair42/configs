@@ -4,10 +4,10 @@ case "$2" in
   template)
     gittemplatefile=$(git config --get commit.template | sed "s|~|$HOME|g");
     cat $gittemplatefile > $1;
-    echo "\n#" >> $1;
+    printf "\n#\n" >> $1;
     git status -sb | head -n 1 | sed 's/^##/#/g' >> $1;
     git diff --cached --stat | sed 's/^/#/g' >> $1;
-    echo "#\n#" >> $1;
+    printf "#\n#\n" >> $1;
     git diff --cached | sed 's/^/# /g' >> $1;;
   commit)
     a=$(cat $1 | grep -v "^#");
