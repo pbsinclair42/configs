@@ -39,6 +39,8 @@
     ad = add
     addu = add -u
     adu = add -u
+    pullr = pull --rebase
+    pulr = pull --rebase
     select = add --patch
     pick = add --patch
     co = commit
