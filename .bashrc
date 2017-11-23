@@ -8,7 +8,7 @@ HISTSIZE=""
 HISTFILESIZE=""
 shopt -s histappend
 
-HISTIGNORE="pwd:?:??"
+HISTIGNORE="pwd:?:??:hgrep*:history*"
 
 # Make a backup of history 5% of the time
 if (( RANDOM % 20 == 0 )); then
