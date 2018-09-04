@@ -67,6 +67,8 @@ _generate_prompt(){
 PROMPT_COMMAND="_generate_prompt"
 export PS2="\[\e[0;34m\]>\[\e[m\] "
 
+PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/\\x7e}\007"'
+
 # Aliases and functions
 # *********************
 
