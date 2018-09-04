@@ -64,10 +64,8 @@ _generate_prompt(){
   GIT_BRANCH=`git branch --column 2> /dev/null | sed 's/.*\* \([^ ]*\).*/<\1> /g'`
   export PS1="${PYTHON_VIRTUALENV}${GREEN}${GIT_BRANCH}${BLUE}[\W]:${NC} "
 }
-PROMPT_COMMAND="_generate_prompt"
+PROMPT_COMMAND='_generate_prompt && echo -ne "\033]0;${PWD/#$HOME/\\x7e}\007"'
 export PS2="\[\e[0;34m\]>\[\e[m\] "
-
-PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/\\x7e}\007"'
 
 # Aliases and functions
 # *********************
