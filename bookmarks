@@ -16,7 +16,7 @@ mkdir -p $BOOKMARK_DIR
 
 # Bookmark current directory (optional name as arg)
 b(){
-  key=${1:-"DEFAULT"}
+  key=${1:-"#DEFAULT"}
   file=$BOOKMARK_DIR/$key
   value=${PWD/$HOME/"~"}
   if [ -r $file ]; then
@@ -34,7 +34,7 @@ b(){
 
 # Go to a bookmark
 go(){
-  key=${1:-"DEFAULT"}
+  key=${1:-"#DEFAULT"}
   file=$BOOKMARK_DIR/$key
   if [ -r $file ]; then
     dest=$(cat $file)
@@ -46,7 +46,7 @@ go(){
 
 # Rename a bookmark
 bmv(){
-  key=${1:-"DEFAULT"}
+  key=${1:-"#DEFAULT"}
   file=$BOOKMARK_DIR/$key
   if [ -r $file ]; then
     if [ $# -gt 1 ]; then
@@ -73,7 +73,7 @@ alias brn=bmv
 
 # Remove a bookmark
 brm(){
-  key=${1:-"DEFAULT"}
+  key=${1:-"#DEFAULT"}
   file=$BOOKMARK_DIR/$key
   if [ -r $file ]; then
     rm $file
