@@ -125,6 +125,9 @@ alias lc='wc -l'
 alias wrap='fold -w $COLUMNS'
 alias wraps='wrap -s'
 
+# Edit ssh config
+alias sshconfig='$EDITOR ~/.ssh/config'
+
 # BEEP
 alias beep='echo -e "\a"'
 
