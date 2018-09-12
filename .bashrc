@@ -121,6 +121,10 @@ alias hgrep='history | grep'
 # Line count
 alias lc='wc -l'
 
+# Word wrap
+alias wrap='fold -w $COLUMNS'
+alias wraps='wrap -s'
+
 # BEEP
 alias beep='echo -e "\a"'
 
