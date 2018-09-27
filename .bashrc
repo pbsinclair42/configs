@@ -97,6 +97,7 @@ alias more='less'
 # Fix typos
 alias gti='git'
 alias gt='git'
+alias sl='ls'
 
 # Navigation aliases
 alias cd..='cd ..'
