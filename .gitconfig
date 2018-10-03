@@ -51,6 +51,7 @@
     preview = diff --cached
     pr = diff --cached
     last = diff --cached HEAD^
+    difw = git diff --word-diff
     conflicts = diff --name-only --diff-filter=U
     unadd = reset
     master = checkout master
