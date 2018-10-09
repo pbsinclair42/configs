@@ -1,3 +1,6 @@
 set colored-stats on
 
-"\b":backward-kill-word
+"\b":backward-kill-word   # ctrl + backspace
+"\e[3;5~": kill-word      # ctrl + delete
+"\e[1;5C": forward-word   # ctrl + right
+"\e[1;5D": backward-word  # ctrl + left
