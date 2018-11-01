@@ -40,6 +40,7 @@
     adu = add -u
     pullr = pull --rebase
     pulr = pull --rebase
+    psr = "!git stash && git pull --rebase && git stash pop > /dev/null && git st"
     select = add --patch
     pick = add --patch
     co = commit
