@@ -8,7 +8,7 @@ HISTSIZE=""
 HISTFILESIZE=""
 shopt -s histappend
 
-HISTIGNORE="pwd:?:??:hgrep*:history*:  *"
+HISTIGNORE="pwd:?:??:hgrep*:history*:  *:git st:g st:git status:g status"
 
 # Make a backup of history 5% of the time
 if (( RANDOM % 20 == 0 )); then
