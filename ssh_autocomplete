@@ -1,0 +1,7 @@
+function _ssh_autocomplete(){
+  HOSTS=$(cat ~/.ssh/config /etc/ssh/ssh_config | grep -i "^host " | grep -v "\*" | sed -s 's/^host //i')
+  cur=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=($(compgen -W "$HOSTS" -- ${cur}))
+}
+
+complete -o default -F _ssh_autocomplete ssh
