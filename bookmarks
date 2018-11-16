@@ -3,10 +3,13 @@
 #   $ b [name]
 #
 #   go to a bookmarked directory by name
-#   $ go name
+#   $ go [name]
+#
+#   rename a bookmark
+#   $ bmv oldname newname
 #
 #   remove a bookmark
-#   $ rmb name
+#   $ brm name
 #
 #   display all bookmarked dirs.
 #   $ bl
