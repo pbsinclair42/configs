@@ -191,34 +191,34 @@ colours(){
 
 # Display custom aliases and functions
 aliases(){
- aliass=$(_getAliases ~/.bashrc)
- echo "$aliass" | sed 's/=/ = /1' | awk 'BEGIN {i=0 ; max=0} {res[i]=$1; $1=""; res[i+1]=$0; res[i+2]=length(res[i]); if(res[i+2]>max)max=res[i+2]; i=i+3; } END {for (j=0;j<i-1;j++){ t=""; for(k=0;k<max-res[j+2];k++){t=t " "};print res[j] t, res[j+1];j+=2}}'
+  aliass=$(_getAliases ~/.bashrc)
+  echo "$aliass" | sed 's/=/ = /1' | awk 'BEGIN {i=0 ; max=0} {res[i]=$1; $1=""; res[i+1]=$0; res[i+2]=length(res[i]); if(res[i+2]>max)max=res[i+2]; i=i+3; } END {for (j=0;j<i-1;j++){ t=""; for(k=0;k<max-res[j+2];k++){t=t " "};print res[j] t, res[j+1];j+=2}}'
 }
 _getAliases(){
- theseAliases=$(cat "$1" | grep "^alias " | sed 's/alias //g' | sed "s/[\'\"]\(.*\)[\'\"]$/\1/g")
- customFunctions=$(cat "$1" | grep -B 1 "^[^_][a-zA-Z0-9_-]*() *{" | sed 's/() *{//g' | paste -d'\t' - - - | sed 's/--//' | sed 's/# \(.*\)\t\(.*\)\t/\2=\1/')
- if [ "$theseAliases" == "" ]; then
-  theseAliases=$customFunctions
- fi
- if [ "$customFunctions" != "" ]; then
-  theseAliases="$theseAliases
-$customFunctions"
- fi
- nextfiles=$(cat "$1" | grep ^source | sed 's/source //g')
- for file in $nextfiles; do
-  file=${file//"~"/$HOME}
-  morealiases=$(eval "_getAliases $file")
+  theseAliases=$(cat "$1" | grep "^alias " | sed 's/alias //g' | sed "s/[\'\"]\(.*\)[\'\"]$/\1/g")
+  customFunctions=$(cat "$1" | grep -B 1 "^[^_][a-zA-Z0-9_-]*() *{" | sed 's/() *{//g' | paste -d'\t' - - - | sed 's/--//' | sed 's/# \(.*\)\t\(.*\)\t/\2=\1/')
   if [ "$theseAliases" == "" ]; then
-   theseAliases=$moreAliases
+    theseAliases=$customFunctions
   fi
-  if [ "$morealiases" != "" ]; then
-   theseAliases="$theseAliases
+  if [ "$customFunctions" != "" ]; then
+    theseAliases="$theseAliases
+$customFunctions"
+  fi
+  nextfiles=$(cat "$1" | grep ^source | sed 's/source //g')
+  for file in $nextfiles; do
+    file=${file//"~"/$HOME}
+    morealiases=$(eval "_getAliases $file")
+    if [ "$theseAliases" == "" ]; then
+      theseAliases=$moreAliases
+    fi
+    if [ "$morealiases" != "" ]; then
+      theseAliases="$theseAliases
 $morealiases"
+    fi
+  done
+  if [ "$theseAliases" != "" ]; then
+    echo "$theseAliases"
   fi
- done
- if [ "$theseAliases" != "" ]; then
-  echo "$theseAliases"
- fi
 }
 
 # Edit and reload bashrc
