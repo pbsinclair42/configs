@@ -96,6 +96,7 @@ alias rename='mv'
 alias panic='reset'
 alias back='cd $OLDPWD'
 alias g='git'
+alias calc='bc -l'
 
 # Only use less if output is big enough to need it (-FX)
 # Use colours (-R)
