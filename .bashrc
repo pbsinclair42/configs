@@ -198,7 +198,7 @@ colours(){
 # Display custom aliases and functions
 aliases(){
   aliass=$(_getAliases ~/.bashrc)
-  echo "$aliass" | sed 's/=/ = /1' | awk 'BEGIN {i=0 ; max=0} {res[i]=$1; $1=""; res[i+1]=$0; res[i+2]=length(res[i]); if(res[i+2]>max)max=res[i+2]; i=i+3; } END {for (j=0;j<i-1;j++){ t=""; for(k=0;k<max-res[j+2];k++){t=t " "};print res[j] t, res[j+1];j+=2}}'
+  echo "$aliass" | sed 's/=/ = /1' | awk 'BEGIN {i=0 ; max=0} {res[i]=$1; $1=""; res[i+1]=$0; res[i+2]=length(res[i]); if(res[i+2]>max)max=res[i+2]; i=i+3; } END {for (j=0;j<i-1;j++){ t=""; for(k=0;k<max-res[j+2];k++){t=t " "};print res[j] t, res[j+1];j+=2}}' | awk '!x[$0]++'
 }
 _getAliases(){
   theseAliases=$(cat "$1" | grep "^alias " | sed 's/alias //g' | sed "s/[\'\"]\(.*\)[\'\"]$/\1/g")
