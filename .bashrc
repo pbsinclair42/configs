@@ -97,6 +97,8 @@ alias panic='reset'
 alias back='cd $OLDPWD'
 alias g='git'
 alias calc='bc -l'
+alias st='git st'
+alias lg='git lg'
 
 # Only use less if output is big enough to need it (-FX)
 # Use colours (-R)
