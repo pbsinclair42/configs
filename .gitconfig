@@ -58,6 +58,7 @@
     master = checkout master
     contributors = shortlog -s -n
     cdiff = !git diff "$@"^!
+    follow = log  --follow --
     logs = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --stat
     logd = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch
     logt = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%ci) %C(bold blue)<%aN>%Creset'
