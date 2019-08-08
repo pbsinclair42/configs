@@ -110,6 +110,7 @@ alias more='less'
 alias gti='git'
 alias gt='git'
 alias sl='ls'
+alias bakc='back'
 
 # Navigation aliases
 alias cd..='cd ..'
