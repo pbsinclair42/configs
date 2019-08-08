@@ -173,7 +173,7 @@ size(){
 
 # BEEP
 beep(){
-  ( ( speaker-test --frequency 400 --test sine >>/dev/null ) & pid=$!; sleep 0.2s; kill -9 $pid; )&
+  ( ( speaker-test --frequency 400 --test sine >>/dev/null ) & pid=$!; sleep 0.2s; kill -9 $pid; )
 }
 
 # Display all terminal colours and their codes
