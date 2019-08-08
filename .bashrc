@@ -142,9 +142,6 @@ alias wraps='wrap -s'
 # Edit ssh config
 alias sshconfig='$EDITOR ~/.ssh/config'
 
-# BEEP
-alias beep='echo -e "\a"'
-
 # Just for fun
 alias busy='cat /dev/urandom | hexdump -C | \grep "ca fe"'
 
@@ -172,6 +169,11 @@ size(){
   else
     { du -sh */ | sed "s#\t\([^/]*\)#\t${esc}[1;34m\1${esc}[m#g"; find -maxdepth 1 -type f -exec du -sh {} + | sed 's\./\\'; } | cat;
   fi;
+}
+
+# BEEP
+beep(){
+  ( ( speaker-test --frequency 400 --test sine >>/dev/null ) & pid=$!; sleep 0.2s; kill -9 $pid; )&
 }
 
 # Display all terminal colours and their codes
