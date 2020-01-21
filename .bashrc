@@ -120,6 +120,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias cd-='cd -'
 
+# Copy to clipboard
+alias copy='xclip -selection clipboard'
+
 # Use ~ instead of home in pwd
 alias wd='echo ${PWD/$HOME/"~"}'
 
