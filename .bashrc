@@ -51,7 +51,7 @@ export VISUAL='vi'
 # Custom prompt
 # *************
 _generate_prompt(){
-  local GREEN BLUE PURPLE NOCOLOUR PYTHON_VIRTUALENV GIT_BRANCH
+  local GREEN BLUE PURPLE GREY NC PYTHON_VIRTUALENV PREFIX SSH_NOTIFICATION GIT_BRANCH
   GREEN="\[\e[0;38;05;64m\]"
   BLUE="\[\e[0;34m\]"
   PURPLE="\[\e[1;38;05;127m\]"
