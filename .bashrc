@@ -454,3 +454,18 @@ makezip() {
 json(){
  cat $1 | jq -C '.' | less -R
 }
+
+# An extension to json which allows passing arguments
+jqless() {
+    if [[ $# -ge 2 ]] ; then
+        exp=$2
+    else
+        exp=.
+    fi
+    if [[ "$1" == *.gz ]] ; then
+        cmd1="gzip -dc"
+    else
+        cmd1="cat"
+    fi
+    eval $cmd1 $1 | jq -C $exp | less
+}
