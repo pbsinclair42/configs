@@ -79,8 +79,9 @@ PROMPT_COMMAND='_generate_prompt && echo -ne "\033]0;${PWD/#$HOME/\\x7e}\007"'
 export PS2="\[\e[0;34m\]>\[\e[m\] "
 
 # Change cursor to a blinking bar
-echo -e -n "\x1b[\x35 q"
-
+if [ "$PS1" ]; then
+  echo -e -n "\x1b[\x35 q"
+fi
 
 # Aliases and functions
 # *********************
