@@ -55,6 +55,7 @@ _generate_prompt(){
   GREEN="\[\e[0;38;05;64m\]"
   BLUE="\[\e[0;34m\]"
   PURPLE="\[\e[1;38;05;127m\]"
+  GREY="\[\e[2;97m\]"
   NC="\[\e[m\]"
   if test -z "$VIRTUAL_ENV" ; then
     PYTHON_VIRTUALENV=""
@@ -66,8 +67,13 @@ _generate_prompt(){
   else
     PREFIX=""
   fi
+  if test -z "$SSH_CLIENT" ; then
+    SSH_NOTIFICATION=""
+  else
+    SSH_NOTIFICATION="${GREY}☁️ "
+  fi
   GIT_BRANCH=`git branch --column 2> /dev/null | tr '\n' ' ' | sed 's/.*\* \([^ ]*\).*/<\1> /g'`
-  export PS1="${PREFIX}${PYTHON_VIRTUALENV}${GREEN}${GIT_BRANCH}${BLUE}[\W]:${NC} "
+  export PS1="${PREFIX}${PYTHON_VIRTUALENV}${GREEN}${GIT_BRANCH}${SSH_NOTIFICATION}${BLUE}[\W]:${NC} "
 }
 PROMPT_COMMAND='_generate_prompt && echo -ne "\033]0;${PWD/#$HOME/\\x7e}\007"'
 export PS2="\[\e[0;34m\]>\[\e[m\] "
