@@ -181,23 +181,41 @@ beep(){
 
 # Display all terminal colours and their codes
 colours(){
-  if [ $# -gt 0 ]; then
+  USAGESTR="Usage: colours [(-s | --simple | --simp)] [(-w | --word) <word to colour>]"
+  SIMPLE_FLAG=false
+  WORD='Test'
+  while [ $# -gt 0 ]; do
     if [ $1 == "-s" -o $1 == "--simple" -o $1 == "--simp" ]; then
-      echo "Example: \e[(0 or 1);(code)m"
-      for code in {30..37} {90..97}; do
-        for attr in 2 0 1; do
-          printf "%s-%02s %bTest%b\n" "${attr}" "${code}" "\e[${attr};${code}m" "\e[m";
-        done
-      done | column -c $((COLUMNS))
-      return
+      SIMPLE_FLAG=true
+      shift
+    elif [ $1 == "-w" -o $1 == "--word" ]; then
+      if [ $# -lt 2 ]; then
+        echo "Option requires an argument:" $1
+        echo $USAGESTR
+        return
+      fi
+      WORD=$2
+      shift
+      shift
     else
-      echo "Usage: colours [-s | -h]"
+      echo 'Unknown option:' $1
+      echo $USAGESTR
+      return
     fi
+  done
+  if [ "$SIMPLE_FLAG" = true ]; then
+    echo "Example: \e[(0 or 1);(code)m"
+    for code in {30..37} {90..97}; do
+      for attr in 2 0 1; do
+        printf "%s-%02s %b${WORD}%b\n" "${attr}" "${code}" "\e[${attr};${code}m" "\e[m";
+      done
+    done | column -c $((COLUMNS))
+    return
   else
     echo "Example: \e[(0 or 1);38;05;(code)m"
     for code in $(seq -w 0 255); do
       for attr in 2 0 1; do
-        printf "%s-%03s %bTest%b\n" "${attr}" "${code}" "\e[${attr};38;5;${code}m" "\e[m";
+        printf "%s-%03s %b${WORD}%b\n" "${attr}" "${code}" "\e[${attr};38;5;${code}m" "\e[m";
       done;
     done | column -c $((COLUMNS*2))
   fi
