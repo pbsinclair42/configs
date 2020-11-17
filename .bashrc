@@ -186,6 +186,11 @@ beep(){
   ( ( speaker-test --frequency 400 --test sine >>/dev/null ) & pid=$!; sleep 0.2s; kill -9 $pid; )
 }
 
+# Remove duplicate lines without sorting
+uniqq(){
+  awk '!x[$0]++'
+}
+
 # Display all terminal colours and their codes
 colours(){
   USAGESTR="Usage: colours [(-s | --simple | --simp)] [(-w | --word) <word to colour>]"
