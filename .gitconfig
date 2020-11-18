@@ -2,6 +2,9 @@
     name = pbsinclair42
     email = bobsmith0030+git2@gmail.com
 
+[pull]
+    rebase = true
+
 [push]
     default = simple
 
@@ -32,6 +35,9 @@
 
 [help]
     autoCorrect = 20
+
+[rerere]
+    enabled = true
 
 [alias]
     st = status -sb
