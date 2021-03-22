@@ -481,3 +481,29 @@ jqless() {
     fi
     eval $cmd1 $1 | jq -C $exp | less
 }
+
+
+# Display sorted count of unique lines
+tally() {
+  sort | uniq -c | sort -rn
+}
+
+# Display an epoch time in a human readable format
+epoch_to_human() {
+  if [[ ${#1} != 13 && ${#1} != 10 ]]; then
+    echo "Expected length 10 (seconds) or 13 (millis). Got ${#1}."
+    return
+  fi
+
+  TSTAMP=$1
+
+  if [[ ${#1} == 13 ]]; then
+    TSTAMP=${1:0:-3}
+  fi
+
+  if [[ "${OSTYPE//[0-9.]/}" == "darwin" ]]; then
+    date -r $TSTAMP
+  else
+    date -d @$TSTAMP
+  fi
+}
