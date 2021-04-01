@@ -33,9 +33,6 @@
 [column]
     branch = auto column nodense
 
-[help]
-    autoCorrect = 20
-
 [rerere]
     enabled = true
 
