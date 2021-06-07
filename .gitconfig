@@ -16,6 +16,7 @@
 
 [core]
     hooksPath = ~/.githooks
+    excludesfile = ~/.gitignore
 
 [grep]
     lineNumber = true

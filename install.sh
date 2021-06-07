@@ -53,6 +53,26 @@ else
   printf "\n# Global config\n" >> ~/.gitconfig
 fi
 
+# Add the universal gitignore from the repo to the computer's global settings
+if [ -f ~/.gitignore ]; then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' '/# Universal ignores/,/# Global ignores/d' $HOME/.gitignore
+  else
+    sed -i '/# Universal ignores/,/# Global ignores/d' $HOME/.gitignore
+  fi
+  \cp $HOME/.gitignore .temp
+  printf "# Universal ignores\n" > ~/.gitignore
+  cat $CONFIG_DIR/.gitignore >> ~/.gitignore
+  printf "\n# Global ignores\n" >> ~/.gitignore
+  cat .temp >> ~/.gitignore
+  \rm .temp
+else
+  touch ~/.gitignore
+  printf "# Universal ignores\n" > ~/.gitignore
+  cat $CONFIG_DIR/.gitignore>> ~/.gitignore
+  printf "\n# Global ignores\n" >> ~/.gitignore
+fi
+
 # Copy the gittemplate
 \cp $CONFIG_DIR/.gittemplate ~/.gittemplate
 

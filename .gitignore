@@ -1,0 +1,10 @@
+# IntelliJ files
+*.iml
+.idea/
+.rakeTasks
+
+# ViM files
+*.swp
+
+# OSX files
+.htaccess

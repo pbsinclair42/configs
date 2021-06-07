@@ -302,6 +302,23 @@ gitconfig(){
   fi
 }
 
+# Edit and reload gitignore
+gitignore(){
+  if [ $# -gt 0 ]; then
+    if [ $1 == "-g" -o $1 == "--global" ]; then
+      vi +1 '+/# Global ignores' "$HOME"/.gitignore < `tty` > `tty`
+    elif [ $1 == "-l" -o $1 == "--local" ]; then
+      vi "$(git rev-parse --show-toplevel)/.gitignore"
+    elif [ $1 == "-u" -o $1 == "--universal" ]; then
+      vi "$CONFIG_DIR"/.gitignore < `tty` > `tty`
+    else
+      echo "usage: gitignore [-l | -g | -u]"
+    fi
+  else
+    vi "$CONFIG_DIR"/.gitignore < `tty` > `tty`
+  fi
+}
+
 # Display count of commands from history
 popular(){
   USAGESTR="usage: popular [-c] [-n #] [-h]"
