@@ -46,6 +46,7 @@
     psr = "!git stash && git pull --rebase && git stash pop > /dev/null; git st"
     fst = "!git fetch && git status -sb"
     fch = "!git fetch && git status -sb"
+    ri = rebase -i
     select = add --patch
     pick = add --patch
     co = commit
