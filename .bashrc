@@ -50,8 +50,8 @@ export VISUAL='vi'
 
 # Custom prompt
 # *************
-_generate_prompt(){
-  local GREEN BLUE PURPLE GREY NC PYTHON_VIRTUALENV PREFIX SSH_NOTIFICATION GIT_BRANCH
+_generate_prompt_and_title(){
+  local GREEN BLUE PURPLE GREY NC PYTHON_VIRTUALENV PREFIX SSH_NOTIFICATION GIT_BRANCH WD PROMPT TITLE
   GREEN="\[\e[0;38;05;64m\]"
   BLUE="\[\e[0;34m\]"
   PURPLE="\[\e[1;38;05;127m\]"
@@ -70,12 +70,15 @@ _generate_prompt(){
   if test -z "$SSH_CLIENT" ; then
     SSH_NOTIFICATION=""
   else
-    SSH_NOTIFICATION="${GREY}☁️ "
+    SSH_NOTIFICATION="☁️ "
   fi
   GIT_BRANCH=`git branch --column 2> /dev/null | tr '\n' ' ' | sed 's/.*\* \([^ ]*\).*/<\1> /g'`
-  export PS1="${PREFIX}${PYTHON_VIRTUALENV}${GREEN}${GIT_BRANCH}${SSH_NOTIFICATION}${BLUE}[\W]:${NC} "
+  PROMPT="${PREFIX}${PYTHON_VIRTUALENV}${GREEN}${GIT_BRANCH}${GREY}${SSH_NOTIFICATION}${BLUE}[\W]:${NC} "
+  WD=${PWD/#$HOME/'~'}
+  TITLE="\[\e]0;${SSH_NOTIFICATION} ${WD}\a\]"
+  export PS1=$PROMPT$TITLE
 }
-PROMPT_COMMAND='_generate_prompt && echo -ne "\033]0;${PWD/#$HOME/\\x7e}\007"'
+PROMPT_COMMAND='_generate_prompt_and_title'
 export PS2="\[\e[0;34m\]>\[\e[m\] "
 
 # Change cursor to a blinking bar
