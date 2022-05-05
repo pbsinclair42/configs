@@ -2,6 +2,9 @@
     name = pbsinclair42
     email = bobsmith0030+git2@gmail.com
 
+[credential]
+    helper = cache
+
 [pull]
     rebase = true
 
