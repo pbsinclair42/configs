@@ -74,12 +74,20 @@ _generate_prompt_and_title(){
   fi
   GIT_BRANCH=`git branch --column 2> /dev/null | tr '\n' ' ' | sed 's/.*\* \([^ ]*\).*/<\1> /g'`
   PROMPT="${PREFIX}${PYTHON_VIRTUALENV}${GREEN}${GIT_BRANCH}${GREY}${SSH_NOTIFICATION}${BLUE}[\W]:${NC} "
-  WD=${PWD/#$HOME/'~'}
-  TITLE="\[\e]0;${SSH_NOTIFICATION} ${WD}\a\]"
+  if [ -z ${TEMPORARY_TITLE+x} ]; then
+    WD=`echo ${PWD/#$HOME/'~'} | sed 's/.*\/\([^\/]*\)/\1/g'`
+    TITLE="\[\e]0;${SSH_NOTIFICATION} ${WD}\a\]"
+  else
+    TITLE="\[\e]0;$TEMPORARY_TITLE\a\]"
+    unset TEMPORARY_TITLE
+  fi
   export PS1=$PROMPT$TITLE
 }
 PROMPT_COMMAND='_generate_prompt_and_title'
 export PS2="\[\e[0;34m\]>\[\e[m\] "
+title(){
+  TEMPORARY_TITLE=$1
+}
 
 # Change cursor to a blinking bar
 if [ "$PS1" ]; then
