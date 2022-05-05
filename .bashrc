@@ -102,6 +102,7 @@ alias egrep='egrep --color=auto'
 # Alias common commands
 alias la='ls -A'
 alias ll='ls -lgGAhN'
+alias lld='ll | sort -k4'
 alias rename='mv'
 alias panic='reset'
 alias back='cd $OLDPWD'
