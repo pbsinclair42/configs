@@ -165,7 +165,7 @@ alias wraps='wrap -s'
 alias sshconfig='$EDITOR ~/.ssh/config'
 
 # Just for fun
-alias busy='cat /dev/urandom | hexdump -C | \grep "ca fe"'
+alias busy='cat /dev/urandom | hexdump -C | \grep "ca fe" --color=always'
 
 # Save the directory of this file
 export CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
