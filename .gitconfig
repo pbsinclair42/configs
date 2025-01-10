@@ -47,6 +47,7 @@
     adu = add -u
     pullr = pull --rebase
     pulr = pull --rebase
+    purl = pull --rebase
     psr = "!git stash && git pull --rebase && git stash pop > /dev/null; git st"
     fst = "!git fetch && git status -sb"
     fch = "!git fetch && git status -sb"
@@ -55,9 +56,11 @@
     pick = add --patch
     co = commit
     cm = commit -m
+    cmf = commit --no-verify -m
     uncommit = reset --soft HEAD^
     discard = checkout --
     fix = commit --amend
+    fixf = commit --amend --no-verify
     di = diff
     preview = diff --cached
     pr = diff --cached
@@ -66,6 +69,7 @@
     conflicts = diff --name-only --diff-filter=U
     unadd = reset
     master = checkout master
+    back = checkout -
     contributors = shortlog -s -n
     cdiff = !git diff "$@"^!
     follow = log  --follow --
