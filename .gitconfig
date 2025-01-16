@@ -40,6 +40,9 @@
 [rerere]
     enabled = true
 
+[advice]
+    skippedCherryPicks = false
+
 [alias]
     st = status -sb
     ad = add
