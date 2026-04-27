@@ -139,14 +139,11 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias cd-='cd -'
 
-# Copy to clipboard
-alias copy='xclip -selection clipboard'
-
 # Use ~ instead of home in pwd
 alias wd='echo ${PWD/$HOME/"~"}'
 
 # Copy working directory path
-alias cwd='pwd | tr -d "\n" | xclip -selection clipboard'
+alias cwd='pwd | tr -d "\n" | copy'
 
 # Pretty print PATH
 alias path='echo -e ${PATH//:/\\n}'
@@ -178,6 +175,20 @@ source "$CONFIG_DIR/git_autocomplete"
 
 # Import ssh autocompletion functionality
 source "$CONFIG_DIR/ssh_autocomplete"
+
+# Copy to clipboard
+copy(){
+  if command -v pbcopy &>/dev/null; then
+    pbcopy
+  elif command -v xclip &>/dev/null; then
+    xclip -selection clipboard
+  elif command -v xsel &>/dev/null; then
+    xsel --clipboard --input
+  else
+    echo "No clipboard utility found (pbcopy, xclip, or xsel)" >&2
+    return 1
+  fi
+}
 
 # Show size of all directories and files
 size(){
