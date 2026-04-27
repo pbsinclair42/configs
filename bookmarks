@@ -86,7 +86,7 @@ brm(){
   fi
 }
 
-if [ $SHELL = "/bin/bash" ]; then
+if [[ $SHELL =~ "bash" ]]; then
   complete -o default -W '`ls $BOOKMARK_DIR`' go bmv brn brm
 fi
 
