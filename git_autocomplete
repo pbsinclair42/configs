@@ -24,7 +24,7 @@ _gitcomp(){
 
 _all_git_commands(){
   # get normal commands
-  for i in `git help -a|egrep '^  [a-zA-Z0-9]'`; do
+  for i in `git help -a | egrep '^ +[a-zA-Z0-9]+' -o`; do
     # filter out boring stuff
     case $i in
       *--*)               ;;
@@ -35,6 +35,7 @@ _all_git_commands(){
       commit-tree)        ;;
       count-object)       ;;
       credential*)        ;;
+      cvs*)               ;;
       daemon)             ;;
       diff-*)             ;;
       fast-*)             ;;
@@ -52,6 +53,7 @@ _all_git_commands(){
       merge-*)            ;;
       mktag)              ;;
       mktree)             ;;
+      p4)                 ;;
       pack-*)             ;;
       patch-id)           ;;
       prune*)             ;;
@@ -75,10 +77,6 @@ _all_git_commands(){
       write-tree)         ;;
       *)                  echo $i;;
     esac;
-  done
-  # get aliased commands
-  for i in `git config --name-only --get-regexp "^alias\..*"`; do
-    echo "${i#alias.}"
   done
 }
 
