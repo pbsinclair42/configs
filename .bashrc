@@ -161,6 +161,20 @@ alias wraps='wrap -s'
 # Edit ssh config
 alias sshconfig='$EDITOR ~/.ssh/config'
 
+# Edit aws config
+alias awsconfig='$EDITOR ~/.aws/config'
+
+# Enable awsauth autocomplete
+_awsauth_complete() {
+  local profiles
+  profiles=$(grep '^\[profile ' ~/.aws/config 2>/dev/null | sed 's/^\[profile //;s/\]$//')
+  COMPREPLY=($(compgen -W "$profiles" -- "${COMP_WORDS[COMP_CWORD]}"))
+}
+
+if [[ $SHELL =~ "bash" ]]; then
+  complete -F _awsauth_complete awsauth
+fi
+
 # Just for fun
 alias busy='cat /dev/urandom | hexdump -C | \grep "ca fe" --color=always'
 
@@ -546,4 +560,9 @@ epoch_to_human() {
   else
     date -d @$TSTAMP
   fi
+}
+
+# Authenticate with AWS
+awsauth(){
+  aws sso login --profile $1 && export AWS_PROFILE="$1"
 }
