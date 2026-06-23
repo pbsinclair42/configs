@@ -76,6 +76,7 @@
     contributors = shortlog -s -n
     cdiff = show
     follow = log  --follow --
+    tidybranch = "!f() { git checkout \"$1\" && git fetch origin && if ! git rebase origin/main; then git rebase --abort && git checkout - && echo \"$1 has conflicts with main\"; elif [ -z \"$(git log origin/main..\"$1\")\" ]; then git checkout - && git branch -D \"$1\" && echo \"$1 deleted\"; else git checkout - && echo \"$1 is not fully merged\"; fi; }; f"
     logs = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --stat
     logd = log --pretty=format:'%n%Cred%h %Creset%s %Cgreen(%cr) %C(bold blue)<%aN>%Creset%+b' --patch
     logt = log --pretty=format:'%Cred%h %Creset%s %Cgreen(%ci) %C(bold blue)<%aN>%Creset'

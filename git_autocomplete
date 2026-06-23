@@ -9,7 +9,7 @@ _gitcomp(){
       COMPREPLY=($(compgen -W "`_all_git_commands`" -- ${cur}));;
     2)
       case ${prev} in
-        checkout)
+        checkout|tidybranch)
           COMPREPLY=($(compgen -W "$branches" -- ${cur}));;
         ad|add|select|pick|discard|di|diff|reset|unadd|preview|pr)
           COMPREPLY=($(compgen -W "$gitfiles" -- ${cur}));;
